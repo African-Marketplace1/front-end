@@ -13,16 +13,20 @@ function App() {
   return (
     <div className="App">
       <Switch>
+        
         <Route path={"/categories/:id"}>
           <Products cats={cats}/>
         </Route>
         <Route path={"/categories"} >
           <Categories cats={cats} />
         </Route>
-        
+        <Route exact path={"/"}>
+          <h1>Hi</h1>
+        </Route>
+
       </Switch>
     </div>
   );
-}
+} 
 
 export default App;
