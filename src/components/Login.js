@@ -20,10 +20,10 @@ const Login =()=> {
     const handleSubmit= e => {
         e.preventDefault()
         axiosWithAuth()
-            .post("http://localhost:3000/api/login", formValues)
+            .post("https://africanmarketplace-1.herokuapp.com/users/login", formValues)
             .then(res=> {
                 localStorage.setItem('token', res.data.token)
-                push("http://localhost:3000/api/somewhere") //redirect to where?
+                push("https://africanmarketplace-1.herokuapp.com/categories") //redirect 
             })
             .catch(err => {
                 console.log(err)
