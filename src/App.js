@@ -1,23 +1,26 @@
 import logo from "./logo.svg";
 import "./App.css";
+import Categories from "./components/Categories";
+import { Route, Link, Switch } from "react-router-dom";
+import React from "react";
+import Products from "./components/Products";
+import cats from "./DummyData";
+
+
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and .
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route path={"/categories/:id"}>
+          <Products cats={cats}/>
+        </Route>
+        <Route path={"/categories"} >
+          <Categories cats={cats} />
+        </Route>
+        
+      </Switch>
     </div>
   );
 }
