@@ -7,6 +7,7 @@ import React from "react";
 import Products from "./components/Products";
 import cats from "./DummyData";
 import Register from './components/Register';
+import AddProduct from './components/AddProduct';
 
 
 function App() {
@@ -14,12 +15,10 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/users/login">
-          <Login />
-        </Route>
-        <Route>
-          <Register />
-        </Route>
+        <Route exact path="/users/login" component = {Login}/>
+        <Route exact path= " /users/register" component={Register}/>
+        <Route exact path= "/addProduct" component= {AddProduct}/>
+        
         <Route path={"/categories/:id"}>
           <Products cats={cats}/>
         </Route>
