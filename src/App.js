@@ -22,6 +22,7 @@ function App() {
         </Route>
         <Route exact path={"/"}>
           <h1>Hi</h1>
+          <Link to="/categories">Click me</Link>
         </Route>
 
       </Switch>
