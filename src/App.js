@@ -12,6 +12,8 @@ import Register from "./components/Register";
 import User from "./components/UserProfile/User";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddProduct from "./components/AddProduct";
+import EditProductForm from "./components/EditProductForm";
+
 const lightTheme = createTheme({ palette: { mode: "light" } });
 
 function App() {
@@ -39,7 +41,10 @@ function App() {
           </Route>
           <Route path={"/addProduct"}>
             <AddProduct setProducts={setProducts} />
-          </Route>
+          </Route> 
+          <Route path={"/editProduct/:id"}>
+            <EditProductForm setProducts={setProducts} />
+          </Route> 
           <Route path="/user">
             <User />
           </Route>
