@@ -9,6 +9,7 @@ import Homepage from "./components/Homepage";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import User from "./components/UserProfile/User";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddProduct from "./components/AddProduct";
 const lightTheme = createTheme({ palette: { mode: "light" } });
@@ -38,6 +39,9 @@ function App() {
           </Route>
           <Route path={"/addProduct"}>
             <AddProduct setProducts={setProducts} />
+          </Route>
+          <Route path="/user">
+            <User />
           </Route>
         </Switch>
       </ThemeProvider>
