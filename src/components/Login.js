@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 const Login = () => {
   const [form, setForm] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const { push } = useHistory();
@@ -20,10 +20,11 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axiosWithAuth()
-      .post('https://africanmarketplace-1.herokuapp.com/users/login', form)
+      .post("https://africanmarketplace-1.herokuapp.com/users/login", form)
       .then((res) => {
-        localStorage.setItem('token', res.data.token);
-        push('https://africanmarketplace-1.herokuapp.com/categories');
+        // localStorage.setItem('token', res.data.token); This will be set automatically (no need)
+        console.log(res.data);
+        push("/");
       })
       .catch((err) => {
         console.log(err);
