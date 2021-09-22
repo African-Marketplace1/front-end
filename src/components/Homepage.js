@@ -85,15 +85,28 @@ export default function Homepage(props) {
               View All
             </Button>
           </Box>
-          <Card component="div" sx={{ display: "inline-block" }}>
-            <CardMedia
-              component="img"
-              src="https://source.unsplash.com/random/300x300"
-            />
-            <CardContent>
-              <Typography>Hello</Typography>
-            </CardContent>
-          </Card>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-around"
+            alignItems="center"
+            spacing={2}
+          >
+            {cats
+              .filter((cats) => cats.id < 5)
+              .map((category) => {
+                return (
+                  <Card component="div">
+                    <CardMedia component="img" src={category.url} />
+                    <CardContent>
+                      <Typography color="inherit" variant="h5">
+                        {category.category_name}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+          </Grid>
         </Paper>
       </div>
     </ThemeProvider>
