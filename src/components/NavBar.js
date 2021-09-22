@@ -48,7 +48,12 @@ const NavBar = (props) => {
                   </div>
                 ) : (
                   <div className="d-flex">
-                    <Button color="inherit" onClick={handleLogout}>
+                    <Button
+                      color="inherit"
+                      onClick={handleLogout}
+                      component={Link}
+                      to="/"
+                    >
                       Logout
                     </Button>
                     <Link to="/user">
