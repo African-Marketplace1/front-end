@@ -97,12 +97,14 @@ export default function Homepage(props) {
               .map((category) => {
                 return (
                   <Card component="div">
-                    <CardMedia component="img" src={category.url} />
-                    <CardContent>
-                      <Typography color="inherit" variant="h5">
-                        {category.category_name}
-                      </Typography>
-                    </CardContent>
+                    <CardActionArea component={Link} to="/login">
+                      <CardMedia component="img" src={category.url} />
+                      <CardContent>
+                        <Typography color="inherit" variant="h5">
+                          {category.category_name}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
                   </Card>
                 );
               })}
