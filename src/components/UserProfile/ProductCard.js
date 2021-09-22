@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import pencil from "../../assets/pencil.svg";
 import axios from "axios";
 import x from "../../assets/x.svg";
@@ -47,12 +48,14 @@ function ProductCard(props) {
         <div className="d-flex justify-content-between align-items-center">
           <h5 className="m-0">${price.toFixed(2)}</h5>
           <div className="icons d-flex">
-            <div
-              className="bg-light d-flex align-items-center justify-content-center"
-              style={{ aspectRatio: "1" }}
-            >
-              <img src={pencil} />
-            </div>
+            <Link to={`/editProduct/${productId}`}>
+              <div
+                className="bg-light d-flex align-items-center justify-content-center"
+                style={{ aspectRatio: "1" }}
+              >
+                <img src={pencil} />
+              </div>
+            </Link>
             <div
               className="bg-light d-flex align-items-center justify-content-center"
               style={{ aspectRatio: "1" }}
