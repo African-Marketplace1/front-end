@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { connect } from "react-redux";
+import { toggleIsFetching } from "../actions";
+import CircularProgress from "@mui/material/CircularProgress";
 
-const Login = () => {
+const Login = (props) => {
+  const [badCredMessage, setBadCredMessage] = useState("");
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -11,6 +15,7 @@ const Login = () => {
   const { push } = useHistory();
 
   const handleChange = (e) => {
+    setBadCredMessage("");
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -19,15 +24,19 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    props.toggleIsFetching(true);
     axiosWithAuth()
       .post("https://africanmarketplace-1.herokuapp.com/users/login", form)
       .then((res) => {
         // localStorage.setItem('token', res.data.token); This will be set automatically (no need)
         console.log(res.data);
         push("/");
+        props.toggleIsFetching(false);
       })
       .catch((err) => {
         console.log(err);
+        setBadCredMessage(err.response.data.message);
+        props.toggleIsFetching(false);
       });
   };
 
@@ -52,8 +61,24 @@ const Login = () => {
           <button>Submit</button>
         </form>
       </div>
+      {props.isFetching && (
+        <div>
+          <CircularProgress />
+        </div>
+      )}
+      {badCredMessage && (
+        <div>
+          <p style={{ color: "red" }}>{badCredMessage}</p>
+        </div>
+      )}
     </div>
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStateToProps, { toggleIsFetching })(Login);
