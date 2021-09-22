@@ -1,7 +1,8 @@
-import { TOGGLE_IS_FETCHING } from "../actions";
+import { TOGGLE_IS_FETCHING, SET_CURRENT_USER } from "../actions";
 
 const initialState = {
   isFetching: false,
+  currentUser: null,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -10,6 +11,12 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: action.payload,
+      };
+    }
+    case SET_CURRENT_USER: {
+      return {
+        ...state,
+        currentUser: action.payload,
       };
     }
     default:
