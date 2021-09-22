@@ -109,7 +109,7 @@ const AddProduct = (props) => {
           <Button variant="contained" color="secondary" type="submit">
             Add Plant
           </Button>
-          <Link to="/categories">
+          <Link to="/user">
             <Button variant="contained" color="secondary">
               Cancel
             </Button>
