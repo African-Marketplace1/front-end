@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
-import { toggleIsFetching } from "../actions";
+import { toggleIsFetching, setCurrentUser } from "../actions";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Login = (props) => {
@@ -28,9 +28,10 @@ const Login = (props) => {
     axiosWithAuth()
       .post("https://africanmarketplace-1.herokuapp.com/users/login", form)
       .then((res) => {
-        // localStorage.setItem('token', res.data.token); This will be set automatically (no need)
+        localStorage.setItem("token", res.data.token);
         console.log(res.data);
         push("/");
+        props.setCurrentUser(res.data.user);
         props.toggleIsFetching(false);
       })
       .catch((err) => {
@@ -81,4 +82,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { toggleIsFetching })(Login);
+export default connect(mapStateToProps, { toggleIsFetching, setCurrentUser })(
+  Login
+);

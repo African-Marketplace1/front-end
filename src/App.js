@@ -1,5 +1,5 @@
-
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Categories from "./components/Categories";
 import { Route, Link, Switch } from "react-router-dom";
 import React, { useState } from "react";
@@ -14,7 +14,7 @@ import AddProduct from "./components/AddProduct";
 const lightTheme = createTheme({ palette: { mode: "light" } });
 
 function App() {
-  const [products, setProducts] = useState(cats)
+  const [products, setProducts] = useState(cats);
 
   return (
     <div className="App">
@@ -37,7 +37,7 @@ function App() {
             <Register />
           </Route>
           <Route path={"/addProduct"}>
-            <AddProduct setProducts={setProducts}/>
+            <AddProduct setProducts={setProducts} />
           </Route>
         </Switch>
       </ThemeProvider>
