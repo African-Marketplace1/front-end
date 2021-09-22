@@ -53,8 +53,12 @@ const NavBar = (props) => {
                     </Button>
                     <Link to="/user">
                       <div
-                        style={{ width: "35px", height: "35px" }}
-                        className="img-fluid"
+                        style={{
+                          width: "35px",
+                          height: "35px",
+                          overflow: "hidden",
+                        }}
+                        className="img-fluid d-flex align-items-center justify-content-center rounded-circle"
                       >
                         <img
                           src={
@@ -63,6 +67,7 @@ const NavBar = (props) => {
                           }
                           className="img-fluid rounded-circle"
                           alt="user logo"
+                          // style={{ aspectRatio: "1" }}
                         />
                       </div>
                     </Link>
