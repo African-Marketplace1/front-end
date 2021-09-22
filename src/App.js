@@ -11,7 +11,7 @@ import Register from "./components/Register";
 import User from "./components/UserProfile/User";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddProduct from "./components/AddProduct";
-
+import PrivateRoute from "./components/PrivateRoute";
 import EditProductForm from "./components/EditProductForm";
 
 import axios from "axios";
@@ -19,6 +19,11 @@ import axios from "axios";
 const lightTheme = createTheme({ palette: { mode: "light" } });
 
 function App() {
+  const isLoggedIn = localStorage.getItem("token")
+  const [categories, setCategories] = useState([]);
+  const [productList, setProductList] = useState([])
+  const [products, setProducts] = useState(cats);
+
   useEffect(() => {
     axios
       .get("https://africanmarketplace-1.herokuapp.com/categories")
@@ -35,10 +40,6 @@ function App() {
       .catch((err) => console.error(err));
   }, []);
 
-  const [categories, setCategories] = useState([]);
-  const [productList, setProductList] = useState([]);
-
-  const [products, setProducts] = useState(cats);
 
   return (
     <div className="App">
@@ -54,12 +55,12 @@ function App() {
           <Route path={"/register"}>
             <Register />
           </Route>
-          <Route path={"/addProduct"}>
+          <PrivateRoute exact path={"/addProduct"}>
             <AddProduct setProducts={setProducts} />
-          </Route> 
-          <Route path={"/editProduct/:id"}>
+          </PrivateRoute> 
+          <PrivateRoute path={"/editProduct/:id"}>
             <EditProductForm setProducts={setProducts} />
-          </Route> 
+          </PrivateRoute> 
           <Route path="/user">
             <User />
           </Route>
