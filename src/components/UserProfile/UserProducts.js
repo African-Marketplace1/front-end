@@ -1,16 +1,20 @@
 import React from "react";
 import ProductCard from "./ProductCard";
+import { connect } from "react-redux";
 
 function UserProducts(props) {
   return (
-    <div className="userProducts py-5 d-flex flex-wrap">
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
-      <ProductCard />
+    <div className="userProducts  d-flex flex-wrap">
+      {props.currentUser.products.map((product) => {
+        return <ProductCard />;
+      })}
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
 
-export default UserProducts;
+export default connect(mapStateToProps)(UserProducts);

@@ -11,9 +11,6 @@ const NavBar = (props) => {
     localStorage.removeItem("token");
   };
 
-  const handleUser = () => {
-    console.log("hi");
-  };
   return (
     <div className="nav-header">
       <header>
@@ -58,7 +55,6 @@ const NavBar = (props) => {
                       <div
                         style={{ width: "35px", height: "35px" }}
                         className="img-fluid"
-                        onClick={handleUser}
                       >
                         <img
                           src={

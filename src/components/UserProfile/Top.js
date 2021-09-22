@@ -16,13 +16,9 @@ function Top(props) {
         />
       </div>
       <div className="textWrap text-start ms-4" style={{ width: "40rem" }}>
-        <h1>Username</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus
-          interdum posuere lorem ipsum. Lorem ipsum dolor sit amet consectetur
-          adipiscing.
-        </p>
+        <h1>{props.currentUser.username}</h1>
+        <p>Location: {props.currentUser.location || "N/A"}</p>
+        <p>Email: {props.currentUser.email || "N/A"}</p>
         <div className="buttons d-flex flex-column justify-content-start align-items-start ">
           <Button color="inherit" size="large">
             Edit Profile
