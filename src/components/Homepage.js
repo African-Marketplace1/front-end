@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link, useRouteMatch, useHistory } from "react-router-dom";
 import "../App.css";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { Button, Typography } from "@mui/material";
-import { CardActionArea } from "@mui/material";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
+import Categories from "./Categories";
+import Products from "./Products";
 
 const lightTheme = createTheme({ palette: { mode: "light" } });
 const Item = styled(Paper)(({ theme }) => ({
@@ -20,7 +17,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Homepage(props) {
-  const { cats } = props;
+  const [productDisplay, setProductDisplay] = useState(false);
+
+  const viewProducts = () => {
+    setProductDisplay(!productDisplay);
+  };
+  const { cats, productList } = props;
 
   return (
     <ThemeProvider theme={lightTheme}>
@@ -54,62 +56,42 @@ export default function Homepage(props) {
                 </Item>
               </Grid>
               <Grid item xs={6}>
-                <Box sx={{ padding: "2%" }}>
-                  <img src="https://source.unsplash.com/random/300x300"></img>
+                <Box>
+                  <img src="https://source.unsplash.com/random/450x450"></img>
                 </Box>
               </Grid>
             </Grid>
           </Paper>
         </div>
-        <div className="categories-container"></div>
-        <Paper elevation={12}>
-          <Box
-            component="div"
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "1.5%",
-            }}
-          >
-            <Typography align="left" variant="h3" color="inherit">
-              Categories
-            </Typography>
-            <Button
-              color="inherit"
-              variant="outlined"
-              size="large"
-              component={Link}
-              to={"/login"}
+        <div className="categories-container">
+          <Paper elevation={12}>
+            <Box
+              component="div"
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "1.5%",
+              }}
             >
-              View All
-            </Button>
-          </Box>
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-around"
-            alignItems="center"
-            spacing={2}
-          >
-            {cats
-              .filter((cats) => cats.id < 5)
-              .map((category) => {
-                return (
-                  <Card component="div">
-                    <CardActionArea component={Link} to="/login">
-                      <CardMedia component="img" src={category.url} />
-                      <CardContent>
-                        <Typography color="inherit" variant="h5">
-                          {category.category_name}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                );
-              })}
-          </Grid>
-        </Paper>
+              <Typography align="left" variant="h3" color="inherit">
+                {productDisplay === true ? "Product List" : "Categories"}
+              </Typography>
+              <Button
+                color="inherit"
+                variant="outlined"
+                size="large"
+                onClick={viewProducts}
+              >
+                {productDisplay === true
+                  ? "View All Categories"
+                  : "View All Products"}
+              </Button>
+            </Box>
+          </Paper>
+        </div>
+        {(productDisplay ? true : false) && <Products products={productList} />}
+        {!productDisplay && <Categories cats={cats} />}
       </div>
     </ThemeProvider>
   );

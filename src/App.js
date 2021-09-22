@@ -2,8 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Categories from "./components/Categories";
 import { Route, Link, Switch } from "react-router-dom";
-import React, { useState } from "react";
-import Products from "./components/Products";
+import React, { useState, useEffect } from "react";
 import cats from "./DummyData";
 import Homepage from "./components/Homepage";
 import NavBar from "./components/NavBar";
@@ -12,11 +11,33 @@ import Register from "./components/Register";
 import User from "./components/UserProfile/User";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddProduct from "./components/AddProduct";
+
 import EditProductForm from "./components/EditProductForm";
+
+import axios from "axios";
 
 const lightTheme = createTheme({ palette: { mode: "light" } });
 
 function App() {
+  useEffect(() => {
+    axios
+      .get("https://africanmarketplace-1.herokuapp.com/categories")
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((err) => console.error(err));
+
+    axios
+      .get("https://africanmarketplace-1.herokuapp.com/products")
+      .then((res) => {
+        setProductList(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const [categories, setCategories] = useState([]);
+  const [productList, setProductList] = useState([]);
+
   const [products, setProducts] = useState(cats);
 
   return (
@@ -25,13 +46,7 @@ function App() {
         <NavBar />
         <Switch>
           <Route exact path={"/"}>
-            <Homepage cats={cats} />
-          </Route>
-          <Route path={"/categories/:id"}>
-            <Products cats={cats} />
-          </Route>
-          <Route path={"/categories"}>
-            <Categories cats={cats} />
+            <Homepage cats={categories} productList={productList} />
           </Route>
           <Route path={"/login"}>
             <Login />
