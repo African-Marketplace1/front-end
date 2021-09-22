@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import pencil from "../../assets/pencil.svg";
 import axios from "axios";
 import x from "../../assets/x.svg";
@@ -10,18 +11,18 @@ function ProductCard(props) {
 
   const handleRemove = (e) => {
     e.preventDefault();
-    // props.toggleIsFetching(true);
+    props.toggleIsFetching(true);
     axios
       .delete(
         `https://africanmarketplace-1.herokuapp.com/products/${productId}`
       )
       .then((res) => {
         props.setCurrentUserProducts(res.data);
-        // props.toggleIsFetching(false);
+        props.toggleIsFetching(false);
       })
       .catch((err) => {
         console.dir(err);
-        // props.toggleIsFetching(false);
+        props.toggleIsFetching(false);
       });
   };
   return (
@@ -47,12 +48,17 @@ function ProductCard(props) {
         <div className="d-flex justify-content-between align-items-center">
           <h5 className="m-0">${price.toFixed(2)}</h5>
           <div className="icons d-flex">
-            <div
-              className="bg-light d-flex align-items-center justify-content-center"
-              style={{ aspectRatio: "1" }}
+            <Link
+              to={`/editProduct/${productId}`}
+              className="d-flex justify-content-center align-items-center"
             >
-              <img src={pencil} />
-            </div>
+              <div
+                className="bg-light d-flex align-items-center justify-content-center"
+                style={{ aspectRatio: "1" }}
+              >
+                <img src={pencil} />
+              </div>
+            </Link>
             <div
               className="bg-light d-flex align-items-center justify-content-center"
               style={{ aspectRatio: "1" }}
