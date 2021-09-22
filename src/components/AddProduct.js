@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
-import { axiosWithAuth} from '../utils/axiosWithAuth';
-
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { connect } from "react-redux";
+import { setCurrentUserProducts } from "../actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: "25ch",
     },
   },
 }));
 
 const intialFormValues = {
-  name: '',
-  category: '',
-  price: '',
-  description:'',
-  image_url: '',
+  name: "",
+  category: "",
+  price: "",
+  description: "",
+  image_url: "",
 };
 
-const  AddProduct=(props)=> {
-  const {push} = useHistory();
+const AddProduct = (props) => {
+  const { push } = useHistory();
   const [formValues, setFormValues] = useState(intialFormValues);
 
   const onChange = (evt) => {
@@ -35,21 +36,30 @@ const  AddProduct=(props)=> {
   };
 
   const onSubmit = (evt) => {
+    console.log("submit");
     evt.preventDefault();
 
     const newPlant = {
       name: formValues.name,
       category: formValues.category,
-      price: formValues.price,
+      price_usd: formValues.price,
       description: formValues.description,
-      image_url: formValues.image_url
+      img: formValues.image_url,
     };
+    console.log(newPlant);
 
     axiosWithAuth()
-      .post('https://africanmarketplace-1.herokuapp.com/products', newPlant)
+      .post(
+        `https://africanmarketplace-1.herokuapp.com/users/${props.currentUser.user_id}`,
+        newPlant
+      )
       .then((res) => {
-        props.setProducts(res.data)
-        push('categories')
+        setCurrentUserProducts(res.data);
+        push("/user");
+      })
+      .catch((err) => {
+        console.dir(err);
+        console.log(err.response.data.message);
       });
   };
 
@@ -112,6 +122,10 @@ const  AddProduct=(props)=> {
       </form>
     </div>
   );
-}
-
-export default AddProduct;
+};
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+export default connect(mapStateToProps, { setCurrentUserProducts })(AddProduct);

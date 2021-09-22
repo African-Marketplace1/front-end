@@ -1,4 +1,6 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Categories from "./components/Categories";
 import { Route, Link, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import cats from "./DummyData";
@@ -6,6 +8,7 @@ import Homepage from "./components/Homepage";
 import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import User from "./components/UserProfile/User";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddProduct from "./components/AddProduct";
 import axios from "axios";
@@ -13,13 +16,6 @@ import axios from "axios";
 const lightTheme = createTheme({ palette: { mode: "light" } });
 
 function App() {
-  //product and category state
-  const [categories, setCategories] = useState([]);
-  const [productList, setProductList] = useState([]);
-  const [products, setProducts] = useState(cats);
-
-  //category & pull
-
   useEffect(() => {
     axios
       .get("https://africanmarketplace-1.herokuapp.com/categories")
@@ -35,6 +31,11 @@ function App() {
       })
       .catch((err) => console.error(err));
   }, []);
+
+  const [categories, setCategories] = useState([]);
+  const [productList, setProductList] = useState([]);
+
+  const [products, setProducts] = useState(cats);
 
   return (
     <div className="App">
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path={"/addProduct"}>
             <AddProduct setProducts={setProducts} />
+          </Route>
+          <Route path="/user">
+            <User />
           </Route>
         </Switch>
       </ThemeProvider>
