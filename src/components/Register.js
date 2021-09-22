@@ -4,6 +4,9 @@ import axios from "axios";
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
+import { connect } from "react-redux";
+import { toggleIsFetching } from "../actions";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +21,7 @@ const initialFormValues = {
   email: "",
   password: "",
 };
-function Register() {
+function Register(props) {
   const history = useHistory();
   const [formValues, setFormValues] = useState(initialFormValues);
 
@@ -30,6 +33,7 @@ function Register() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    props.toggleIsFetching(true);
     const newUser = {
       username: formValues.username,
       email: formValues.email,
@@ -42,6 +46,11 @@ function Register() {
       )
       .then((res) => {
         console.log(res);
+        props.toggleIsFetching(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        props.toggleIsFetching(false);
       });
   };
   const classes = useStyles();
@@ -80,7 +89,19 @@ function Register() {
           Sign Up!
         </Button>
       </form>
+      {props.isFetching && (
+        <div>
+          <CircularProgress />
+        </div>
+      )}
     </div>
   );
 }
-export default Register;
+
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStateToProps, { toggleIsFetching })(Register);
