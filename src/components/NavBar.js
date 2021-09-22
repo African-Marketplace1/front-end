@@ -29,9 +29,6 @@ const NavBar = (props) => {
                 </Button>
               </div>
               <div className="other-buttons d-flex">
-                <Button component={Link} color="inherit" to={"/categories"}>
-                  Categories
-                </Button>
                 {!props.currentUser ? (
                   <div>
                     <Button component={Link} color="inherit" to={"/login"}>
