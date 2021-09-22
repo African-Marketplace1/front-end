@@ -22,9 +22,9 @@ export default function NavBar() {
                 </Button>
               </div>
               <div className="other-buttons">
-                <Button component={Link} color="inherit" to={"/categories"}>
+                {/* <Button component={Link} color="inherit" to={"/categories"}>
                   Categories
-                </Button>
+                </Button> */}
                 <Button component={Link} color="inherit" to={"/login"}>
                   Login
                 </Button>
