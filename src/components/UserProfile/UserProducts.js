@@ -1,5 +1,6 @@
 import React from "react";
 import ProductCard from "./ProductCard";
+import CircularProgress from "@mui/material/CircularProgress";
 import { connect } from "react-redux";
 
 function UserProducts(props) {
@@ -16,6 +17,7 @@ function UserProducts(props) {
                     img={product.img}
                     price={product.price_usd}
                     name={product.name}
+                    productId={product.product_id}
                   />
                 );
               })}
