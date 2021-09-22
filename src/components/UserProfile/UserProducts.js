@@ -7,10 +7,19 @@ function UserProducts(props) {
     <div>
       <div>
         {props.currentUser.products && (
-          <div className="userProducts  d-flex flex-wrap pb-5">
-            {props.currentUser.products.map((product) => {
-              return <ProductCard img={product.img} />;
-            })}
+          <div>
+            <h1>Your Products:</h1>
+            <div className="userProducts  d-flex flex-wrap pb-5">
+              {props.currentUser.products.map((product) => {
+                return (
+                  <ProductCard
+                    img={product.img}
+                    price={product.price_usd}
+                    name={product.name}
+                  />
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
