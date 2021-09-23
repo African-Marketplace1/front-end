@@ -24,7 +24,7 @@ function Top(props) {
         <p>Location: {props.currentUser.location || "N/A"}</p>
         <p>Email: {props.currentUser.email || "N/A"}</p>
         <div className="buttons d-flex flex-column justify-content-start align-items-start ">
-          <Button color="inherit" size="large">
+          <Button color="inherit" size="large" component={Link} to="/user/edit">
             Edit Profile
           </Button>
           <Button

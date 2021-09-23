@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import User from "./components/UserProfile/User";
 import ForeignUser from "./components/ForeignUser/ForeignUser";
+import EditUserForm from "./components/EditUserForm";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddProduct from "./components/AddProduct";
 import PrivateRoute from "./components/PrivateRoute";
@@ -63,6 +64,9 @@ function App() {
           </PrivateRoute>
           <Route exact path="/user">
             <User />
+          </Route>
+          <Route path="/user/edit">
+            <EditUserForm />
           </Route>
           <Route path="/user/:id">
             <ForeignUser />
