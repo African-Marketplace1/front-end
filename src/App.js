@@ -1,6 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Categories from "./components/Categories";
+import jwt from "jsonwebtoken";
 import { Route, Link, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import cats from "./DummyData";
@@ -15,12 +16,14 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddProduct from "./components/AddProduct";
 import PrivateRoute from "./components/PrivateRoute";
 import EditProductForm from "./components/EditProductForm";
+import { setCurrentUser } from "./actions";
+import { connect } from "react-redux";
 
 import axios from "axios";
 
 const lightTheme = createTheme({ palette: { mode: "light" } });
 
-function App() {
+function App(props) {
   const isLoggedIn = localStorage.getItem("token");
   const [categories, setCategories] = useState([]);
   const [productList, setProductList] = useState([]);
@@ -40,6 +43,14 @@ function App() {
         setProductList(res.data);
       })
       .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
+      const currentUser = jwt.decode(token).user;
+      props.setCurrentUser(currentUser);
+    }
   }, []);
 
   return (
@@ -77,4 +88,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { setCurrentUser })(App);
