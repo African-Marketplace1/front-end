@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { setCurrentUserProducts, toggleIsFetching } from "../../actions";
 
 function ProductCard(props) {
-  const { img, name, price, productId, description } = props;
+  const { img, name, price, productId, description, category } = props;
 
   const handleRemove = (e) => {
     e.preventDefault();
@@ -50,7 +50,18 @@ function ProductCard(props) {
         <div className="d-flex justify-content-between align-items-center">
           <h5 className="m-0">${price.toFixed(2)}</h5>
           <div className="icons d-flex">
-            <Link to={`/editProduct/${productId}`}>
+            <Link
+              to={{
+                pathname: `/editProduct/${productId}`,
+                state: {
+                  name: name,
+                  price: price,
+                  image_url: img,
+                  description: description,
+                  category: category,
+                },
+              }}
+            >
               <div
                 className="bg-light d-flex align-items-center justify-content-center"
                 style={{ aspectRatio: "1", transform: "translateY(4px)" }}

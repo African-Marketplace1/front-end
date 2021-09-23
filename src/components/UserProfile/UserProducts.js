@@ -19,6 +19,7 @@ function UserProducts(props) {
                     name={product.name}
                     productId={product.product_id}
                     description={product.description}
+                    category={product.category_name}
                   />
                 );
               })}
