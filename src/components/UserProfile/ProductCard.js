@@ -31,7 +31,7 @@ function ProductCard(props) {
       style={{ width: "23.291%", boxShadow: "0px 2px 5px grey" }}
     >
       <div
-        className="imgWrap bg-white d-flex justify-content-center align-items-center rounded"
+        className="imgWrap bg-white d-flex justify-content-center align-items-center rounded border"
         style={{ aspectRatio: "1" }}
       >
         <img
@@ -42,7 +42,7 @@ function ProductCard(props) {
         />
       </div>
       <div
-        className="textWrap d-flex flex-column justify-content-between  align-items-between px-4 "
+        className="textWrap d-flex flex-column justify-content-between  align-items-between px-4 pt-2"
         style={{ minHeight: "7rem" }}
       >
         <h3>{name}</h3>
