@@ -15,8 +15,8 @@ import { setProducts, toggleIsFetching } from "../actions";
 import CircularProgress from "@mui/material/CircularProgress";
 
 function Products(props) {
-  props.toggleIsFetching(true);
   useEffect(() => {
+    props.toggleIsFetching(true);
     axios
       .get("https://africanmarketplace-1.herokuapp.com/products")
       .then((res) => {
