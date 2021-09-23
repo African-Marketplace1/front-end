@@ -8,8 +8,9 @@ import { toggleIsFetching, setCurrentUser } from "../../actions";
 
 function User(props) {
   useEffect(() => {
-    props.toggleIsFetching(true);
     if (props.currentUser) {
+      props.toggleIsFetching(true);
+
       axios
         .get(
           `https://africanmarketplace-1.herokuapp.com/users/${props.currentUser.user_id}`
