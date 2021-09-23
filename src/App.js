@@ -9,6 +9,7 @@ import NavBar from "./components/NavBar";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import User from "./components/UserProfile/User";
+import ForeignUser from "./components/ForeignUser/ForeignUser";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddProduct from "./components/AddProduct";
 import PrivateRoute from "./components/PrivateRoute";
@@ -19,9 +20,9 @@ import axios from "axios";
 const lightTheme = createTheme({ palette: { mode: "light" } });
 
 function App() {
-  const isLoggedIn = localStorage.getItem("token")
+  const isLoggedIn = localStorage.getItem("token");
   const [categories, setCategories] = useState([]);
-  const [productList, setProductList] = useState([])
+  const [productList, setProductList] = useState([]);
   const [products, setProducts] = useState(cats);
 
   useEffect(() => {
@@ -40,7 +41,6 @@ function App() {
       .catch((err) => console.error(err));
   }, []);
 
-
   return (
     <div className="App">
       <ThemeProvider theme={lightTheme}>
@@ -57,12 +57,15 @@ function App() {
           </Route>
           <PrivateRoute exact path={"/addProduct"}>
             <AddProduct setProducts={setProducts} />
-          </PrivateRoute> 
+          </PrivateRoute>
           <PrivateRoute path={"/editProduct/:id"}>
             <EditProductForm setProducts={setProducts} />
-          </PrivateRoute> 
-          <Route path="/user">
+          </PrivateRoute>
+          <Route exact path="/user">
             <User />
+          </Route>
+          <Route path="/user/:id">
+            <ForeignUser />
           </Route>
         </Switch>
       </ThemeProvider>

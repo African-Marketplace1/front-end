@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { setCurrentUserProducts, toggleIsFetching } from "../../actions";
 
 function ProductCard(props) {
-  const { img, name, price, productId } = props;
+  const { img, name, price, productId, description } = props;
 
   const handleRemove = (e) => {
     e.preventDefault();
@@ -27,17 +27,18 @@ function ProductCard(props) {
   };
   return (
     <div
-      className="productCardWrap bg-light border p-2 m-2"
-      style={{ width: "23.291%" }}
+      className="productCardWrap bg-light border p-2 m-2 rounded"
+      style={{ width: "23.291%", boxShadow: "0px 2px 5px grey" }}
     >
       <div
-        className="imgWrap bg-light d-flex justify-content-center align-items-center"
+        className="imgWrap bg-white d-flex justify-content-center align-items-center rounded"
         style={{ aspectRatio: "1" }}
       >
         <img
           src={img}
           style={{ maxWidth: "100%", maxHeight: "100%" }}
           alt="product logo"
+          className="rounded"
         />
       </div>
       <div
@@ -45,13 +46,14 @@ function ProductCard(props) {
         style={{ minHeight: "7rem" }}
       >
         <h3>{name}</h3>
+        <p>{description}</p>
         <div className="d-flex justify-content-between align-items-center">
           <h5 className="m-0">${price.toFixed(2)}</h5>
           <div className="icons d-flex">
             <Link to={`/editProduct/${productId}`}>
               <div
                 className="bg-light d-flex align-items-center justify-content-center"
-                style={{ aspectRatio: "1" }}
+                style={{ aspectRatio: "1", transform: "translateY(4px)" }}
               >
                 <img src={pencil} />
               </div>
