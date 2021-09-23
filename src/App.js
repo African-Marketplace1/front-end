@@ -84,10 +84,7 @@ function App(props) {
           </Route>
         </Switch>
       </ThemeProvider>
-      <script
-        async
-        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"
-      ></script>
+   
     </div>
   );
 }
