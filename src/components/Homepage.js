@@ -90,7 +90,7 @@ export default function Homepage(props) {
             </Box>
           </Paper>
         </div>
-        {(productDisplay ? true : false) && <Products products={productList} />}
+        {(productDisplay ? true : false) && <Products />}
         {!productDisplay && <Categories cats={cats} />}
       </div>
     </ThemeProvider>
