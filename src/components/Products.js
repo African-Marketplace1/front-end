@@ -4,6 +4,7 @@
 
 import React, { useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "../App.css";
 import Grid from "@mui/material/Grid";
 import { Button, Typography } from "@mui/material";
@@ -50,9 +51,14 @@ function Products(props) {
                   </Typography>
                   <Typography color="inherit">${prod.price_usd}</Typography>
                   <Typography color="inherit">{prod.description}</Typography>
-                  <Typography color="inherit">
-                    Seller: {prod.seller.username}
-                  </Typography>
+                  <Link
+                    to={`/user/${prod.seller.user_id}`}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <Typography color="inherit">
+                      Seller: {prod.seller.username}
+                    </Typography>
+                  </Link>
                 </CardContent>
               </Card>
             </Grid>
