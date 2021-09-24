@@ -3,11 +3,13 @@ import {
   SET_CURRENT_USER,
   SET_CURRENT_USER_PRODUCTS,
   SET_PRODUCTS,
+  SET_ACTIVE_CATEGORY,
 } from "../actions";
 
 const initialState = {
   isFetching: false,
   currentUser: null,
+  activeCategory: null,
   products: [],
 };
 
@@ -35,6 +37,12 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         products: action.payload,
+      };
+    }
+    case SET_ACTIVE_CATEGORY: {
+      return {
+        ...state,
+        activeCategory: action.payload,
       };
     }
     default:
