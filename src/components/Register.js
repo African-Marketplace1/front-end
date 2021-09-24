@@ -2,22 +2,12 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import LocationRegisterBar from "./LocationRegisterBar";
-import { TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { toggleIsFetching } from "../actions";
 import CircularProgress from "@mui/material/CircularProgress";
 import worldIsMine from "../assets/worldIsMine.svg";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-      width: "25ch",
-    },
-  },
-}));
 const initialFormValues = {
   username: "",
   email: "",
