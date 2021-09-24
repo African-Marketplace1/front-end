@@ -7,8 +7,8 @@ function Top(props) {
   return (
     <div className="top d-flex justify-content-center mb-5">
       <div
-        className="imgWrap"
-        style={{ width: "30rem", height: "30rem", overflow: "hidden" }}
+        className="imgWrap d-flex justify-content-end"
+        style={{ width: "50%", height: "30rem", overflow: "hidden" }}
       >
         <img
           src={
@@ -19,12 +19,12 @@ function Top(props) {
           style={{ maxHeight: "100%", maxWidth: "100%" }}
         />
       </div>
-      <div className="textWrap text-start ms-4" style={{ width: "40rem" }}>
+      <div className="textWrap text-start ms-4 " style={{ width: "50%" }}>
         <h1>{props.currentUser.username}</h1>
         <p>Location: {props.currentUser.location || "N/A"}</p>
         <p>Email: {props.currentUser.email || "N/A"}</p>
         <div className="buttons d-flex flex-column justify-content-start align-items-start ">
-          <Button color="inherit" size="large">
+          <Button color="inherit" size="large" component={Link} to="/user/edit">
             Edit Profile
           </Button>
           <Button

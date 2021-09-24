@@ -7,6 +7,7 @@ import axios from "axios";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
 import { setCurrentUserProducts } from "../actions";
+import CategorySelect from "./CategorySelect";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +31,8 @@ const AddProduct = (props) => {
   const [formValues, setFormValues] = useState(intialFormValues);
 
   const onChange = (evt) => {
+    console.log(evt.target.value);
+    console.log(evt.target.name);
     const inputName = evt.target.name;
     const inputValue = evt.target.value;
     setFormValues({ ...formValues, [inputName]: inputValue });
@@ -76,14 +79,7 @@ const AddProduct = (props) => {
           value={formValues.name}
           onChange={onChange}
         />
-        <TextField
-          id="outlined-basic"
-          name="category"
-          label="category"
-          variant="outlined"
-          value={formValues.category}
-          onChange={onChange}
-        />
+        <CategorySelect onChange={onChange} />
         <TextField
           id="outlined-basic"
           name="price"
@@ -113,7 +109,7 @@ const AddProduct = (props) => {
           <Button variant="contained" color="secondary" type="submit">
             Add Plant
           </Button>
-          <Link to="/categories">
+          <Link to="/user">
             <Button variant="contained" color="secondary">
               Cancel
             </Button>

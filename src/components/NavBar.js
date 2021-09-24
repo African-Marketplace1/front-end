@@ -1,4 +1,5 @@
 import React from "react";
+import LocationBar from "./LocationSearchBar";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { AppBar } from "@mui/material";
@@ -28,6 +29,7 @@ const NavBar = (props) => {
                   Home&nbsp;
                 </Button>
               </div>
+              <LocationBar />
               <div className="other-buttons d-flex">
                 {!props.currentUser ? (
                   <div>

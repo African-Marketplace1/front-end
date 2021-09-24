@@ -29,6 +29,7 @@ const Login = (props) => {
       .post("https://africanmarketplace-1.herokuapp.com/users/login", form)
       .then((res) => {
         localStorage.setItem("token", res.data.token);
+        console.log(res);
         console.log(res.data);
         push("/");
         props.setCurrentUser(res.data.user);
