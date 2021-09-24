@@ -20,6 +20,9 @@ import { setCurrentUser } from "./actions";
 import { connect } from "react-redux";
 
 import axios from "axios";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import Products from "./components/Products";
 
 const lightTheme = createTheme({ palette: { mode: "light" } });
 
@@ -34,6 +37,16 @@ function App(props) {
       .get("https://africanmarketplace-1.herokuapp.com/categories")
       .then((res) => {
         setCategories(res.data);
+        gsap.from(".homepage-text", {
+          duration: 1.25,
+          opactity: 0,
+          x: -300,
+        });
+        gsap.from(".homepage-pic", {
+          duration: 1.75,
+          opactity: 0,
+          x: 500,
+        });
       })
       .catch((err) => console.error(err));
 
@@ -57,6 +70,7 @@ function App(props) {
     <div className="App">
       <ThemeProvider theme={lightTheme}>
         <NavBar />
+
         <Switch>
           <Route exact path={"/"}>
             <Homepage cats={categories} productList={productList} />
