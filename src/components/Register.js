@@ -36,13 +36,7 @@ function Register(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues);
     props.toggleIsFetching(true);
-    // const newUser = {
-    //   username: formValues.username,
-    //   email: formValues.email,
-    //   password: formValues.password,
-    // };
     axios
       .post(
         "https://africanmarketplace-1.herokuapp.com/users/register ",
@@ -54,7 +48,7 @@ function Register(props) {
         push("/login");
       })
       .catch((err) => {
-        console.log(err);
+        console.dir(err);
         props.toggleIsFetching(false);
       });
   };
@@ -119,32 +113,6 @@ function Register(props) {
                 formValues={formValues}
               />
             </label>
-
-            {/* <TextField
-          id="outlined-basic"
-          name="username"
-          label="Username"
-          variant="outlined"
-          value={formValues.username}
-          onChange={handleChange}
-        />
-        <TextField
-          id="outlined-basic"
-          name="email"
-          label="email"
-          variant="outlined"
-          value={formValues.email}
-          onChange={handleChange}
-        />
-        <TextField
-          type="password"
-          id="outlined-basic"
-          name="password"
-          label="Password"
-          variant="outlined"
-          value={formValues.password}
-          onChange={handleChange}
-        /> */}
             <div className="d-flex justify-content-end">
               <Button color="inherit" type="submit">
                 Sign Up!
