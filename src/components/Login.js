@@ -31,13 +31,12 @@ const Login = (props) => {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         console.log(res);
-        console.log(res.data);
         push("/");
         props.setCurrentUser(res.data.user);
         props.toggleIsFetching(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.dir(err);
         setBadCredMessage(err.response.data.message);
         props.toggleIsFetching(false);
       });
@@ -62,7 +61,7 @@ const Login = (props) => {
                 name="username"
                 value={form.username}
                 onChange={handleChange}
-                style={{ width: "100%" }}
+                style={{ width: "100%", height: "2.25rem" }}
               />
             </label>
 
@@ -76,11 +75,11 @@ const Login = (props) => {
                 name="password"
                 value={form.password}
                 onChange={handleChange}
-                style={{ width: "100%" }}
+                style={{ width: "100%", height: "2.25rem" }}
               />
             </label>
             <div className="d-flex justify-content-end">
-              <Button>Submit</Button>
+              <Button type="submit">Submit</Button>
             </div>
           </form>
         </div>
