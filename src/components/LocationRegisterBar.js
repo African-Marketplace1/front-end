@@ -1,89 +1,76 @@
 import React, { useState } from "react";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-places-autocomplete";
-import searchLogo from "../assets/pencil.svg";
+import PlacesAutocomplete from "react-places-autocomplete";
 
 function LocationBar(props) {
+  const { formValues, setFormValues } = props;
   const [address, setAddress] = useState("");
-  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
   const handleSelect = async (value) => {
-    console.log(value);
-    const results = await geocodeByAddress(value);
-    console.log(results);
-    const latlng = await getLatLng(results[0]);
+    setFormValues({
+      ...formValues,
+      location: value,
+    });
     setAddress(value);
-    setCoordinates(latlng);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("hgi");
-    console.log(coordinates);
-    console.log(await getLatLng("140 58th Street, Brooklyn, NY, USA"));
-  };
   return (
-    <div>
+    <div style={{ width: "30rem" }}>
       <PlacesAutocomplete
         value={address}
         onChange={setAddress}
         onSelect={handleSelect}
+        style={{ width: "100%" }}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
           return (
-            <form onSubmit={handleSubmit}>
-              <div className="m-auto" style={{ width: "426px" }}>
-                <div className="d-flex justify-content-between">
-                  <input
-                    {...getInputProps({
-                      placeholder: "Type Address",
-                    })}
-                    style={{ width: "400px" }}
-                  />
-                  <button className="bg-white border-0" type="submit">
-                    <img
-                      src={searchLogo}
-                      style={{ cursor: "pointer" }}
-                      type="submit"
-                      alt="magnifying glass icon"
-                    />
-                  </button>
-                </div>
-
-                <div
-                  style={{
-                    zIndex: "3",
-                    position: "absolute",
-                    paddingTop: "2px",
-                    // border: "2px solid black",
-                    borderRadius: "2px",
-                    overflow: "hidden",
-                  }}
-                >
-                  {loading ? (
-                    <div style={{ backgroundColor: "white", width: "400px" }}>
-                      ...Loading
-                    </div>
-                  ) : null}
-
-                  {suggestions.map((suggestion) => {
-                    const style = {
-                      zIndex: "2",
-                      width: "400px",
-                      cursor: suggestion.active ? "pointer" : null,
-                      backgroundColor: suggestion.active ? "#d3d3d3" : "white",
-                    };
-                    return (
-                      <div {...getSuggestionItemProps(suggestion, { style })}>
-                        {suggestion.description}
-                      </div>
-                    );
+            <div className="m-auto" style={{ width: "100%" }}>
+              <div
+                className="d-flex justify-content-between"
+                style={{ width: "100%" }}
+              >
+                <input
+                  {...getInputProps({
+                    placeholder: "Type Address",
                   })}
-                </div>
+                  style={{
+                    width: "100%",
+                    height: "2.25rem",
+                    border: "1px solid #767676",
+                    borderRadius: "2px",
+                  }}
+                />
               </div>
-            </form>
+
+              <div
+                style={{
+                  zIndex: "3",
+                  position: "absolute",
+                  paddingTop: "2px",
+                  borderRadius: "2px",
+                  overflow: "hidden",
+                }}
+              >
+                {loading ? (
+                  <div style={{ backgroundColor: "white", width: "100%" }}>
+                    ...Loading
+                  </div>
+                ) : null}
+
+                {suggestions.map((suggestion, i) => {
+                  const style = {
+                    zIndex: "2",
+                    width: "30rem",
+                    cursor: suggestion.active ? "pointer" : null,
+                    backgroundColor: suggestion.active ? "#d3d3d3" : "#f2f2f2",
+                  };
+                  return (
+                    <div {...getSuggestionItemProps(suggestion, { style })}>
+                      {suggestion.description}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           );
         }}
       </PlacesAutocomplete>
