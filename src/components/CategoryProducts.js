@@ -1,13 +1,19 @@
-import React from "react";
+// import React, { useState, useEffect } from "react";
+// import axios from "axios";
+// import { useParams, NavLink, useRouteMatch } from "react-router-dom";
+
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import Grid from "@mui/material/Grid";
 import { Button, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import { useParams } from "react-router";
+import axios from "axios";
 
-export default function Products(props) {
-  const { products } = props;
+export default function CategoryProducts(props) {
+  const { categoryProducts } = props;
 
   return (
     <Grid
@@ -16,7 +22,7 @@ export default function Products(props) {
       justifyContent="space-around"
       alignItems="center"
     >
-      {products.map((prod) => {
+      {categoryProducts.map((prod) => {
         return (
           <Grid item xs={3} padding="1%">
             <Card component="div">

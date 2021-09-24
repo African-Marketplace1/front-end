@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, Component, useEffect } from "react";
 import "../App.css";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -7,6 +7,9 @@ import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Categories from "./Categories";
 import Products from "./Products";
+import homepagePic from "../assets/homepage-banner.jpg";
+import Card from "@mui/material/Card";
+import CardMedia from "@mui/material/CardMedia";
 
 const lightTheme = createTheme({ palette: { mode: "light" } });
 const Item = styled(Paper)(({ theme }) => ({
@@ -22,6 +25,7 @@ export default function Homepage(props) {
   const viewProducts = () => {
     setProductDisplay(!productDisplay);
   };
+
   const { cats, productList } = props;
 
   return (
@@ -39,7 +43,7 @@ export default function Homepage(props) {
           <Paper sx={{ p: 2, margin: "auto", flexGrow: 1 }}>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs={6} alignItems="stretch">
-                <Item elevation={6}>
+                <Item elevation={6} className="homepage-text">
                   <Typography
                     gutterBottom
                     variant="h4"
@@ -56,9 +60,14 @@ export default function Homepage(props) {
                 </Item>
               </Grid>
               <Grid item xs={6}>
-                <Box>
-                  <img src="https://source.unsplash.com/random/450x450"></img>
-                </Box>
+                <Card style={{ border: "none", boxShadow: "none" }}>
+                  <CardMedia
+                    component="img"
+                    src={homepagePic}
+                    className="homepage-pic"
+                  />
+                  {/* <img src={homepagePic} className="homepage-pic"></img> */}
+                </Card>
               </Grid>
             </Grid>
           </Paper>
@@ -91,7 +100,13 @@ export default function Homepage(props) {
           </Paper>
         </div>
         {(productDisplay ? true : false) && <Products products={productList} />}
-        {!productDisplay && <Categories cats={cats} />}
+        {!productDisplay && (
+          <Categories
+            key={cats.category_id}
+            cats={cats}
+            products={productList}
+          />
+        )}
       </div>
     </ThemeProvider>
   );
