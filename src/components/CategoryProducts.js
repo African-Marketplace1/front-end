@@ -2,18 +2,36 @@
 // import axios from "axios";
 // import { useParams, NavLink, useRouteMatch } from "react-router-dom";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
+
 import "../App.css";
 import Grid from "@mui/material/Grid";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { useParams } from "react-router";
 import axios from "axios";
+import { setProducts, toggleIsFetching } from "../actions";
+import { connect } from "react-redux";
+import { useEffect } from "react";
 
-export default function CategoryProducts(props) {
+function CategoryProducts(props) {
   const { categoryProducts } = props;
+
+  useEffect(() => {
+    props.toggleIsFetching(true);
+    axios
+      .get("https://africanmarketplace-1.herokuapp.com/categories")
+      .then((res) => {
+        props.toggleIsFetching(false);
+        props.setProducts(res.data);
+      })
+      .catch((err) => {
+        props.toggleIsFetching(false);
+        console.dir(err);
+      });
+  }, []);
 
   return (
     <Grid
@@ -33,9 +51,14 @@ export default function CategoryProducts(props) {
                 </Typography>
                 <Typography color="inherit">${prod.price_usd}</Typography>
                 <Typography color="inherit">{prod.description}</Typography>
-                <Typography color="inherit">
-                  Seller: {prod.seller.username}
-                </Typography>
+                <Link
+                  to={`/user/${prod.seller.user_id}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <Typography color="inherit">
+                    Seller: {prod.seller.username}
+                  </Typography>
+                </Link>
               </CardContent>
             </Card>
           </Grid>
@@ -44,3 +67,12 @@ export default function CategoryProducts(props) {
     </Grid>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStateToProps, { setProducts, toggleIsFetching })(
+  CategoryProducts
+);
