@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { connect } from "react-redux";
 import { toggleIsFetching, setCurrentUser } from "../actions";
+import { Button } from "@material-ui/core";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Login = (props) => {
@@ -44,24 +45,45 @@ const Login = (props) => {
 
   return (
     <div>
-      <h1>Welcome to Water My Plants!</h1>
-      <div className="login-form">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="username">User Name: </label>
-          <input
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">Password: </label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-          />
-          <button>Submit</button>
-        </form>
+      <div className="login-form py-5">
+        <div className="container">
+          <form
+            onSubmit={handleSubmit}
+            className="m-auto"
+            style={{ width: "30rem" }}
+          >
+            <h1 className="text-start">Login</h1>
+            <label
+              htmlFor="username"
+              className="d-flex flex-column justify-content-center align-items-start mb-2"
+            >
+              Username:{" "}
+              <input
+                name="username"
+                value={form.username}
+                onChange={handleChange}
+                style={{ width: "100%" }}
+              />
+            </label>
+
+            <label
+              htmlFor="password"
+              className="d-flex flex-column justify-content-center align-items-start mb-2"
+            >
+              Password:{" "}
+              <input
+                type="password"
+                name="password"
+                value={form.password}
+                onChange={handleChange}
+                style={{ width: "100%" }}
+              />
+            </label>
+            <div className="d-flex justify-content-end">
+              <Button>Submit</Button>
+            </div>
+          </form>
+        </div>
       </div>
       {props.isFetching && (
         <div>

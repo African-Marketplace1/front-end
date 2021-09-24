@@ -22,6 +22,7 @@ function LocationBar(props) {
     e.preventDefault();
     console.log("hgi");
     console.log(coordinates);
+
     console.log(await getLatLng("140 58th Street, Brooklyn, NY, USA"));
   };
   return (
