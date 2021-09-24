@@ -10,16 +10,19 @@ function LocationBar(props) {
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
   const handleSelect = async (value) => {
+    console.log(value);
     const results = await geocodeByAddress(value);
+    console.log(results);
     const latlng = await getLatLng(results[0]);
     setAddress(value);
     setCoordinates(latlng);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("hgi");
     console.log(coordinates);
+    console.log(await getLatLng("140 58th Street, Brooklyn, NY, USA"));
   };
   return (
     <div>
@@ -29,7 +32,6 @@ function LocationBar(props) {
         onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
-          console.log(getInputProps());
           return (
             <form onSubmit={handleSubmit}>
               <div className="m-auto" style={{ width: "426px" }}>

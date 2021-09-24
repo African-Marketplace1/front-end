@@ -43,10 +43,12 @@ function ProductCard(props) {
       </div>
       <div
         className="textWrap d-flex flex-column justify-content-between  align-items-between px-4 pt-2"
-        style={{ minHeight: "7rem" }}
+        style={{ minHeight: "10rem" }}
       >
-        <h3>{name}</h3>
-        <p>{description}</p>
+        <div>
+          <h3 style={{ fontSize: "1.5rem" }}>{name}</h3>
+          <p>{description}</p>
+        </div>
         <div className="d-flex justify-content-between align-items-center">
           <h5 className="m-0">${price.toFixed(2)}</h5>
           <div className="icons d-flex">

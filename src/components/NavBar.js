@@ -18,7 +18,7 @@ const NavBar = (props) => {
         <nav>
           <AppBar color="inherit" position="sticky">
             <div className="appbar-nav">
-              <div className="home-button">
+              <div className="home-button d-flex" style={{ width: "33.33%" }}>
                 <Button
                   edge="start"
                   className="home-nav"
@@ -29,8 +29,16 @@ const NavBar = (props) => {
                   Home&nbsp;
                 </Button>
               </div>
-              <LocationBar />
-              <div className="other-buttons d-flex">
+              <div
+                style={{ width: "33.33%" }}
+                className="d-flex justify-content-center"
+              >
+                <LocationBar />
+              </div>
+              <div
+                className="other-buttons d-flex justify-content-end"
+                style={{ width: "33.33%" }}
+              >
                 {!props.currentUser ? (
                   <div>
                     <Button component={Link} color="inherit" to={"/login"}>
