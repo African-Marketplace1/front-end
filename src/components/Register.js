@@ -53,7 +53,6 @@ function Register(props) {
         props.toggleIsFetching(false);
       });
   };
-  const classes = useStyles();
 
   return (
     <div>
