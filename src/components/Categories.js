@@ -8,7 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import CategoryProducts from "./CategoryProducts";
-
+import { setActiveCategory } from "../actions";
 import axios from "axios";
 
 export default function Categories(props) {
@@ -31,6 +31,7 @@ export default function Categories(props) {
 
     const routeToProducts = (event) => {
       event.preventDefault();
+      setActiveCategory(props.category.category_name);
       setShowProductsInCategory(!showProductsInCategory);
       setViewAllbar(!ViewAllbar);
       axios
