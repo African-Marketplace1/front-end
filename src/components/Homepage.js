@@ -10,6 +10,8 @@ import Products from "./Products";
 import homepagePic from "../assets/homepage-banner.jpg";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
+import { connect } from "react-redux";
+import { setActiveCategory } from "../actions";
 
 const lightTheme = createTheme({ palette: { mode: "light" } });
 const Item = styled(Paper)(({ theme }) => ({
@@ -19,12 +21,16 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function Homepage(props) {
+const Homepage = (props) => {
   const [productDisplay, setProductDisplay] = useState(false);
   const [showProductsInCategory, setShowProductsInCategory] = useState(false);
   const [viewAllbar, setViewAllbar] = useState(false);
 
+  useEffect(() => {
+    props.setActiveCategory(null);
+  }, []);
   const viewProducts = () => {
+
     if (viewAllbar && showProductsInCategory) {
       setProductDisplay(productDisplay);
       setShowProductsInCategory(!showProductsInCategory);
@@ -33,6 +39,7 @@ export default function Homepage(props) {
       setViewAllbar(!viewAllbar);
       setProductDisplay(!productDisplay);
     }
+
   };
 
   const { cats, productList } = props;
@@ -95,6 +102,9 @@ export default function Homepage(props) {
               <Typography align="left" variant="h3" color="inherit">
                 {viewAllbar ? "Product List" : "Categories"}
               </Typography>
+              <Typography variant="h5">
+                {props.activeCategory ? props.activeCategory : ""}
+              </Typography>
               <Button
                 color="inherit"
                 variant="outlined"
@@ -124,4 +134,12 @@ export default function Homepage(props) {
       </div>
     </ThemeProvider>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    ...state,
+  };
+};
+
+export default connect(mapStateToProps, { setActiveCategory })(Homepage);

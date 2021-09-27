@@ -16,9 +16,9 @@ import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import AddProduct from "./components/AddProduct";
 import PrivateRoute from "./components/PrivateRoute";
 import EditProductForm from "./components/EditProductForm";
-import { setCurrentUser } from "./actions";
+import { setCurrentUser, setUsers } from "./actions";
 import { connect } from "react-redux";
-
+import LocationSearch from "./components/LocationSearch";
 import axios from "axios";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -56,6 +56,15 @@ function App(props) {
         setProductList(res.data);
       })
       .catch((err) => console.error(err));
+
+    axios
+      .get("https://africanmarketplace-1.herokuapp.com/users")
+      .then((res) => {
+        props.setUsers(res.data);
+      })
+      .catch((err) => {
+        console.dir(err);
+      });
   }, []);
 
   useEffect(() => {
@@ -96,11 +105,13 @@ function App(props) {
           <Route path="/user/:id">
             <ForeignUser />
           </Route>
+          <Route path="/locationSearch">
+            <LocationSearch />
+          </Route>
         </Switch>
       </ThemeProvider>
-   
     </div>
   );
 }
 
-export default connect(null, { setCurrentUser })(App);
+export default connect(null, { setCurrentUser, setUsers })(App);

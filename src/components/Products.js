@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
 import "../App.css";
 import Grid from "@mui/material/Grid";
 import { Button, Typography } from "@mui/material";
@@ -18,6 +17,7 @@ function Products(props) {
     axios
       .get("https://africanmarketplace-1.herokuapp.com/products")
       .then((res) => {
+        console.log(res);
         props.toggleIsFetching(false);
         props.setProducts(res.data);
       })
@@ -34,9 +34,8 @@ function Products(props) {
       justifyContent="space-around"
       alignItems="center"
     >
-      {props.IsFetching ? (
-        <CircularProgress />
-      ) : (
+      {props.isFetching && <CircularProgress />}
+      {props.products &&
         props.products.map((prod) => {
           return (
             <Grid item xs={3} padding="1%">
@@ -60,8 +59,7 @@ function Products(props) {
               </Card>
             </Grid>
           );
-        })
-      )}
+        })}
     </Grid>
   );
 }

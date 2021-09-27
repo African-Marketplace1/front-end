@@ -14,7 +14,6 @@ export default function CategorySelect(props) {
         <InputLabel
           id="label"
           style={{
-            backgroundColor: "white",
             padding: "0px 5px 5px 5px",
           }}
         ></InputLabel>
