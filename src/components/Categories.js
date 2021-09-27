@@ -13,27 +13,37 @@ import { setActiveCategory } from "../actions";
 
 import axios from "axios";
 
-const Categories = (props) => {
-  const [showProductsInCategory, setShowProductsInCategory] = useState(false);
+
+export default function Categories(props) {
+  // const [showProductsInCategory, setShowProductsInCategory] = useState(false);
+
   const [categoryProductList, setcategoryProductList] = useState([]);
-  const { cats, products, changeViewAllState, setActiveCategory } = props;
+  const {
+    cats,
+    products,
+    showProductsInCategory,
+    setShowProductsInCategory,
+    productDisplay,
+    setProductDisplay,
+    setViewAllbar,
+    ViewAllbar,
+  } = props;
+
 
   const CategoryDetails = (props) => {
     const { category } = props;
 
     const routeToProducts = (event) => {
       event.preventDefault();
-      console.log(props);
-      setActiveCategory(props.category.category_name);
 
       setShowProductsInCategory(!showProductsInCategory);
+      setViewAllbar(!ViewAllbar);
       axios
         .get(
           `https://africanmarketplace-1.herokuapp.com/categories/${category.category_id}`
         )
         .then((res) => {
           setcategoryProductList(res.data);
-          console.log(categoryProductList);
         })
         .catch((err) => console.error(err));
     };
