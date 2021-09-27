@@ -21,9 +21,18 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Homepage(props) {
   const [productDisplay, setProductDisplay] = useState(false);
+  const [showProductsInCategory, setShowProductsInCategory] = useState(false);
+  const [viewAllbar, setViewAllbar] = useState(false);
 
   const viewProducts = () => {
-    setProductDisplay(!productDisplay);
+    if (viewAllbar && showProductsInCategory) {
+      setProductDisplay(productDisplay);
+      setShowProductsInCategory(!showProductsInCategory);
+      setViewAllbar(!viewAllbar);
+    } else {
+      setViewAllbar(!viewAllbar);
+      setProductDisplay(!productDisplay);
+    }
   };
 
   const { cats, productList } = props;
@@ -84,7 +93,7 @@ export default function Homepage(props) {
               }}
             >
               <Typography align="left" variant="h3" color="inherit">
-                {productDisplay === true ? "Product List" : "Categories"}
+                {viewAllbar ? "Product List" : "Categories"}
               </Typography>
               <Button
                 color="inherit"
@@ -92,9 +101,7 @@ export default function Homepage(props) {
                 size="large"
                 onClick={viewProducts}
               >
-                {productDisplay === true
-                  ? "View All Categories"
-                  : "View All Products"}
+                {viewAllbar ? "View All Categories" : "View All Products"}
               </Button>
             </Box>
           </Paper>
@@ -106,6 +113,12 @@ export default function Homepage(props) {
             key={cats.category_id}
             cats={cats}
             products={productList}
+            showProductsInCategory={showProductsInCategory}
+            setShowProductsInCategory={setShowProductsInCategory}
+            productDisplay={productDisplay}
+            setProductDisplay={setProductDisplay}
+            viewAllbar={viewAllbar}
+            setViewAllbar={setViewAllbar}
           />
         )}
       </div>

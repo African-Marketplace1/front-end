@@ -12,24 +12,33 @@ import CategoryProducts from "./CategoryProducts";
 import axios from "axios";
 
 export default function Categories(props) {
-  const [showProductsInCategory, setShowProductsInCategory] = useState(false);
+  // const [showProductsInCategory, setShowProductsInCategory] = useState(false);
+
   const [categoryProductList, setcategoryProductList] = useState([]);
-  const { cats, products, changeViewAllState } = props;
+  const {
+    cats,
+    products,
+    showProductsInCategory,
+    setShowProductsInCategory,
+    productDisplay,
+    setProductDisplay,
+    setViewAllbar,
+    ViewAllbar,
+  } = props;
 
   function CategoryDetails(props) {
     const { category } = props;
 
     const routeToProducts = (event) => {
       event.preventDefault();
-
       setShowProductsInCategory(!showProductsInCategory);
+      setViewAllbar(!ViewAllbar);
       axios
         .get(
           `https://africanmarketplace-1.herokuapp.com/categories/${category.category_id}`
         )
         .then((res) => {
           setcategoryProductList(res.data);
-          console.log(categoryProductList);
         })
         .catch((err) => console.error(err));
     };
