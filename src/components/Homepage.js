@@ -30,7 +30,6 @@ const Homepage = (props) => {
     props.setActiveCategory(null);
   }, []);
   const viewProducts = () => {
-
     if (viewAllbar && showProductsInCategory) {
       setProductDisplay(productDisplay);
       setShowProductsInCategory(!showProductsInCategory);
@@ -39,7 +38,6 @@ const Homepage = (props) => {
       setViewAllbar(!viewAllbar);
       setProductDisplay(!productDisplay);
     }
-
   };
 
   const { cats, productList } = props;

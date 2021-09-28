@@ -8,13 +8,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import CategoryProducts from "./CategoryProducts";
-import { connect } from "react-redux";
 import { setActiveCategory } from "../actions";
+import { connect } from "react-redux";
 
 import axios from "axios";
 
-
-export default function Categories(props) {
+const Categories = (props) => {
   // const [showProductsInCategory, setShowProductsInCategory] = useState(false);
 
   const [categoryProductList, setcategoryProductList] = useState([]);
@@ -29,13 +28,12 @@ export default function Categories(props) {
     ViewAllbar,
   } = props;
 
-
   const CategoryDetails = (props) => {
     const { category } = props;
 
     const routeToProducts = (event) => {
       event.preventDefault();
-
+      setActiveCategory(props.category.category_name);
       setShowProductsInCategory(!showProductsInCategory);
       setViewAllbar(!ViewAllbar);
       axios
