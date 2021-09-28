@@ -48,8 +48,8 @@ const EditProductForm = (props) => {
   };
 
   return (
-    <div className="col">
-      <div className="modal-content">
+    <div className="editForm py-5 container">
+      <div className="col">
         <form
           onSubmit={handleSubmit}
           style={{ width: "30rem" }}
@@ -112,14 +112,14 @@ const EditProductForm = (props) => {
             </div>
           </div>
           <div className="modal-footer d-flex justify-content-center">
+            <Link to={`/user`}>
+              <input type="button" className="btn btn-default" value="Cancel" />
+            </Link>
             <input
               type="submit"
               className="btn btn-primary me-2"
               value="Submit Changes"
             />
-            <Link to={`/user`}>
-              <input type="button" className="btn btn-default" value="Cancel" />
-            </Link>
           </div>
         </form>
       </div>
